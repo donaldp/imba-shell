@@ -6,7 +6,7 @@ describe('src/ImbaRunner', () => {
 		expect(ImbaRunner.version).toContain('.');
 	});
 
-	it('should return imba path instance.', () => {
+	it('should return imba instance path.', () => {
 		expect(ImbaRunner.instance()).toContain('node_modules');
 	});
 
