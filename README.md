@@ -56,7 +56,7 @@ repl.run();
 
 ### History
 
-Here's an example of how to use the history feature:
+Here's an example of how to enable the history feature:
 
 Imba:
 
