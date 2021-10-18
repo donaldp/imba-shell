@@ -39,7 +39,7 @@ import { ImbaRepl } from 'imba-shell'
 
 const repl = new ImbaRepl 'imba> '
 
-ImbaRepl.run!
+repl.run!
 ```
 
 JavaScript:
@@ -67,7 +67,7 @@ import path from 'path'
 
 const repl = new ImbaRepl 'imba> ', path.join(os.homedir!, '.my_repl_history')
 
-ImbaRepl.run!
+repl.run!
 ```
 
 JavaScript:
