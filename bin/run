@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+const { Command, ImbaRepl } = require('../lib');
+const os = require('os');
+const path = require('path');
+
+class ReplCommand extends Command {
+	async handle() {
+		const repl = new ImbaRepl('>>> ', path.join(os.homedir(), '.imba_shell_history'));
+
+		repl.registerCallback((ctx) => {
+			ctx.exit = () => process.exit();
+		});
+
+		await repl.run();
+	}
+}
+
+(new ReplCommand).run();
