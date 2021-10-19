@@ -12,7 +12,7 @@ class ReplCommand extends Command {
 			ctx.exit = () => process.exit();
 		});
 
-		await repl.run();
+		await repl.run({ ignoreUndefined: true });
 	}
 }
 
