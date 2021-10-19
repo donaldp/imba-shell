@@ -22,7 +22,7 @@ export default class ImbaCompiler
 		if !fs.existsSync(directory)
 			fs.mkdirSync(directory, { recursive: true })
 
-		fs.writeFileSync(path.join(directory, 'repl.imba'), self.code)
+		fs.writeFileSync(path.join(directory, 'repl.imba'), self.code.replace(/[   ]{4}/g, '	').trim!)
 
 		const results\Buffer = execSync("{ImbaRunner.instance!} {path.join(directory, 'repl.imba')} --platform=node --print")
 
