@@ -1,6 +1,7 @@
 import { execSync } from 'child_process'
 import fs from 'fs'
 import ImbaRunner from './ImbaRunner'
+import os from 'os'
 import path from 'path'
 
 export default class ImbaCompiler
@@ -17,15 +18,17 @@ export default class ImbaCompiler
 		new ImbaCompiler code
 
 	def get
-		const directory\String = path.join(process.cwd!, 'node_modules', '.imba', path.basename(process.cwd!))
+		const directory\String = path.join os.homedir!, '.imba-shell'
 
 		if !fs.existsSync(directory)
 			fs.mkdirSync(directory, { recursive: true })
 
-		fs.writeFileSync(path.join(directory, 'repl.imba'), self.code.replace(/[   ]{4}/g, '	').trim!)
+		const file = String new Date!.valueOf!
 
-		const results\Buffer = execSync("{ImbaRunner.instance!} {path.join(directory, 'repl.imba')} --platform=node --print")
+		fs.writeFileSync(path.join(directory, file), self.code.replace(/[   ]{4}/g, '	').trim!)
 
-		fs.rmSync(path.join(directory, 'repl.imba'))
+		const results\Buffer = execSync("{ImbaRunner.instance!} {path.join(directory, file)} --platform=node --print")
+
+		fs.rmSync(path.join(directory, file))
 
 		results.toString!
