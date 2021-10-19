@@ -28,6 +28,18 @@ imba-shell
 
 > Note, you can also use `imbas` instead of `imba-shell`.
 
+### Multiline
+
+To use multi-line mode, use the .editor command:
+
+```bash
+>>> .editor
+```
+
+This will open a multi-line editor.
+
+> Note, for tabs, always use 4 spaces. Imba Shell will convert these spaces into tabs. 4 spaces = 1 tab.
+
 ## Programmable API
 
 `imba-shell` can also be used as a module. Here's an example:
