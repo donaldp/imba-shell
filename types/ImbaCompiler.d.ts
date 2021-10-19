@@ -1,4 +1,6 @@
-export default class ImbaCompiler {
+export var __esModule: boolean;
+export default ImbaCompiler;
+declare class ImbaCompiler {
     /**
     @param {String} code
     */
@@ -12,4 +14,3 @@ export default class ImbaCompiler {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
-export {};

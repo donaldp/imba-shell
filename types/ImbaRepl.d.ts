@@ -1,4 +1,6 @@
-export default class ImbaRepl {
+export var __esModule: boolean;
+export default ImbaRepl;
+declare class ImbaRepl {
     /**
     @param {String} prompt
     @param {String|null} historyPath
@@ -24,4 +26,3 @@ export default class ImbaRepl {
     [Ψ__init__]($$?: any): void;
 }
 declare const Ψ__init__: unique symbol;
-export {};
