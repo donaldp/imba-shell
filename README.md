@@ -28,7 +28,7 @@ imba-shell
 
 > Note, you can also use `imbas` instead of `imba-shell`.
 
-## Programable API
+## Programmable API
 
 `imba-shell` can also be used as a module. Here's an example:
 
