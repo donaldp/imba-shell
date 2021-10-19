@@ -17,9 +17,8 @@
 	"homepage": "https://github.com/donaldp/imba-shell",
 	"repository": "https://github.com/donaldp/imba-shell",
 	"scripts": {
-		"build": "npm run imba:build && npm run imba:build:temp && npm run ts:build",
+		"build": "npm run imba:build && npm run ts:build",
 		"imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
-		"imba:build:temp": "imbac src --output=.temp --platform=node --clean",
 		"imba:watch": "imbac -w src --output=lib --platform=node --clean",
 		"ts:build": "tsc",
 		"ts:watch": "tsc -w",
