@@ -40,6 +40,22 @@ This will open a multi-line editor.
 
 > Note, for tabs, always use 4 spaces. Imba Shell will convert these spaces into tabs. 4 spaces = 1 tab.
 
+### Clear
+
+To clear the `imba-shell`, use the `clear` helper:
+
+```bash
+>>> clear!
+```
+
+### Exit
+
+To exit out of `imba-shell`, use the `exit` helper:
+
+```bash
+>>> exit!
+```
+
 ## Programmable API
 
 `imba-shell` can also be used as a module. Here's an example:
@@ -112,7 +128,7 @@ repl.registerCommand 'goodbye', do
 JavaScript:
 
 ```py
-repl.registerCommand('goodbye', function () {
+repl.registerCommand('goodbye', () => {
 	console.log("Goodbye!');
 	this.close();
 });
@@ -143,6 +159,12 @@ repl.registerCallback((ctx) => {
 ```
 
 When calling `foo` in the REPL, it will return `bar`.
+
+Todo
+-------
+
+- [ ] Imba errors (compile errors).
+- [ ] 
 
 Security
 -------

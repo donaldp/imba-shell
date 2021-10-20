@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { Command, ImbaRepl } = require('../lib');
+const { Command, ContextHelpers, ImbaRepl } = require('../lib');
 const os = require('os');
 const path = require('path');
 
@@ -9,7 +9,9 @@ class ReplCommand extends Command {
 		const repl = new ImbaRepl('>>> ', path.join(os.homedir(), '.imba_shell_history'));
 
 		repl.registerCallback((ctx) => {
-			ctx.exit = () => process.exit();
+			Object.keys(ContextHelpers).forEach((key) => {
+				ctx[key] = ContextHelpers[key];
+			});
 		});
 
 		await repl.run({ ignoreUndefined: true });
