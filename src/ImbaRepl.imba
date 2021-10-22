@@ -1,9 +1,10 @@
 import { author, version } from '../package.json'
+import * as ContextHelpers from './ContextHelpers'
 import ImbaCompiler from './ImbaCompiler'
 import ImbaRunner from './ImbaRunner'
-import repl from 'repl'
 import os from 'os'
 import path from 'path'
+import repl from 'repl'
 
 export default class ImbaRepl
 
@@ -42,7 +43,7 @@ export default class ImbaRepl
 		if options !== null && (options !== null && typeof options === 'object' && Array.isArray(options) === false) !== true
 			throw new TypeError 'Expected repl options to be an Object.'
 
-		console.log "Imba Shell v{version} (imba {ImbaRunner.version}) by {author.split('<')[0]}"
+		console.log "Imba Shell v{version} (imba {ImbaRunner.version}) by {author}"
 
 		const server = await repl.start { ...{ prompt: self.prompt }, ...options }
 
@@ -56,9 +57,24 @@ export default class ImbaRepl
 		for handler in self.cmdCallbacks
 			server.defineCommand handler.name, handler.callback
 
+		for own key, handler of ContextHelpers
+			server.context[key] = handler
+
 		const cmdEval = server.eval
 
+		const sessionId = String new Date!.valueOf!
+
 		server.eval = do(cmd, context, file, cb)
-			cmdEval(ImbaCompiler.code(cmd).get!, context, file, cb)
+			const compiledCode = ImbaCompiler.code(cmd, sessionId).get!
+
+			cmdEval(compiledCode, context, file, do(error, results)
+				if error then return cb(error)
+
+				try cb(null, await Promise.resolve(results))
+				catch err
+					cb(err)
+			)
+
+		server.sessionId = sessionId
 
 		server
