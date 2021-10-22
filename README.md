@@ -163,7 +163,12 @@ When calling `foo` in the REPL, it will return `bar`.
 Todo
 -------
 
-- [ ] Imba errors (compile errors).
+- &#9745; Code completion.
+- &#9745; Multiline Editor.
+- &#9745; Async/Await.
+- &#9745; Extensible API.
+- &#9746; Syntax highlighting.
+- &#9746; Imba Compile Errors.
 
 Security
 -------
