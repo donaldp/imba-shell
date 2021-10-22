@@ -9,7 +9,9 @@ describe('src/ImbaCompiler', () => {
 	});
 
 	it('should compile Imba to JavaScript.', () => {
-		expect(ImbaCompiler.code('console.log "Hello World!"').get()).toContain('console.log("Hello World!")');
+		const sessionId = String(new Date().valueOf());
+
+		expect(ImbaCompiler.code('console.log "Hello World!"', sessionId).get()).toContain('console.log("Hello World!")');
 	});
 
 })
