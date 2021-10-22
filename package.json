@@ -1,6 +1,6 @@
 {
 	"name": "imba-shell",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Interactive debugger and REPL for Imba.",
 	"keywords": [
 		"imba",
@@ -9,7 +9,7 @@
 		"repl",
 		"debugger"
 	],
-	"author": "Donald Pakkies <donaldpakkies@gmail.com>",
+	"author": "Donald Pakkies",
 	"license": "MIT",
 	"main": "lib/index.js",
 	"types": "types/index.d.ts",
@@ -19,7 +19,7 @@
 	"scripts": {
 		"build": "npm run imba:build && npm run ts:build",
 		"imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
-		"imba:watch": "imbac -w src --output=lib --platform=node --clean",
+		"imba:watch": "imbac -w src --output=lib --platform=node --format=cjs --clean",
 		"ts:build": "tsc",
 		"ts:watch": "tsc -w",
 		"test": "jest --roots test",
@@ -34,7 +34,7 @@
 	},
 	"devDependencies": {
 		"@types/jest": "^27.0.2",
-		"jest": "^27.3.0",
+		"jest": "^27.3.1",
 		"typescript": "^4.4.4"
 	}
 }
