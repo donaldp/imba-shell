@@ -1,20 +1,24 @@
 #!/usr/bin/env node
 
-const { Command, ContextHelpers, ImbaRepl } = require('../lib');
+const { Command, ImbaRepl } = require('../lib');
+const imba = require('imba');
 const os = require('os');
 const path = require('path');
 
 class ReplCommand extends Command {
-	async handle() {
+	handle() {
 		const repl = new ImbaRepl('>>> ', path.join(os.homedir(), '.imba_shell_history'));
 
+		/** load imba. */
 		repl.registerCallback((ctx) => {
-			Object.keys(ContextHelpers).forEach((key) => {
-				ctx[key] = ContextHelpers[key];
+			Object.keys(imba).forEach((key) => {
+				if (!ctx[key]) {
+					ctx[key] = imba[key];
+				}
 			});
-		});
+		})
 
-		await repl.run({ ignoreUndefined: true });
+		repl.run({ ignoreUndefined: true });
 	}
 }
 

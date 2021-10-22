@@ -1,13 +1,13 @@
-import * as HelpersContext from './ContextHelpers'
-import Command from './Command';
-import ImbaCompiler from './Command';
-import ImbaRepl from './Command';
-import ImbaRunner from './Command';
+import * as ContextHelpers from './ContextHelpers'
+import Command from './Command'
+import ImbaCompiler from './ImbaCompiler'
+import ImbaRepl from './ImbaRepl'
+import ImbaRunner from './ImbaRunner'
 
 export {
+	ContextHelpers,
 	Command,
-	HelpersContext,
 	ImbaCompiler,
 	ImbaRepl,
 	ImbaRunner
-};
+}
