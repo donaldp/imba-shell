@@ -3,13 +3,16 @@ export default ImbaCompiler;
 declare class ImbaCompiler {
     /**
     @param {String} code
+    @param {String} sessionId
     */
-    static code(code: string): ImbaCompiler;
+    static code(code: string, sessionId: string): ImbaCompiler;
     /**
     @param {String} code
+    @param {String} sessionId
     */
-    constructor(code: string);
+    constructor(code: string, sessionId: string);
     code: string;
+    sessionId: string;
     get(): string;
     [Ψ__init__]($$?: any): void;
 }
