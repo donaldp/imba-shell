@@ -7,15 +7,20 @@ import path from 'path'
 export default class ImbaCompiler
 
 	prop code\String
+	prop sessionId\String
 
-	def constructor code\String
+	def constructor code\String, sessionId\String
 		if typeof code !== 'string'
-			throw new TypeError 'Expected String.'
+			throw new TypeError 'Expected code to be a String.'
+
+		if typeof sessionId !== 'string'
+			throw new TypeError 'Expected sessionId to be a String.'
 
 		self.code = code
+		self.sessionId = sessionId
 
-	static def code code\String
-		new ImbaCompiler code
+	static def code code\String, sessionId\String
+		new ImbaCompiler code, sessionId
 
 	def get
 		const directory\String = path.join os.homedir!, '.imba-shell'
@@ -23,12 +28,10 @@ export default class ImbaCompiler
 		if !fs.existsSync(directory)
 			fs.mkdirSync(directory, { recursive: true })
 
-		const file = String new Date!.valueOf!
+		fs.writeFileSync(path.join(directory, self.sessionId), self.code.replace(/[   ]{4}/g, '\t').trim!)
 
-		fs.writeFileSync(path.join(directory, file), self.code.replace(/[   ]{4}/g, '	').trim!)
+		const results\Buffer = execSync("{ImbaRunner.instance!} {path.join(directory, self.sessionId)} --platform=node --print")
 
-		const results\Buffer = execSync("{ImbaRunner.instance!} {path.join(directory, file)} --platform=node --print")
-
-		fs.rmSync(path.join(directory, file))
+		fs.rmSync(path.join(directory, self.sessionId))
 
 		results.toString!
