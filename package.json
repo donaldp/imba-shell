@@ -30,7 +30,7 @@
 		"imbas": "./bin/run"
 	},
 	"dependencies": {
-		"imba": "^2.0.0-alpha.183"
+		"imba": "^2.0.0-alpha.186"
 	},
 	"devDependencies": {
 		"@types/jest": "^27.0.2",
