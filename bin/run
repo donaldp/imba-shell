@@ -16,7 +16,7 @@ class ReplCommand extends Command {
 					ctx[key] = imba[key];
 				}
 			});
-		})
+		});
 
 		repl.run({ ignoreUndefined: true });
 	}

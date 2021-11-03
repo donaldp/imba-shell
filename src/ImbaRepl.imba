@@ -51,6 +51,13 @@ export default class ImbaRepl
 			server.setupHistory self.historyPath, do(err, cb)
 				if err then throw err
 
+		self.registerCommand 'clear', do
+			ContextHelpers.clear!
+			process.stdout.write self.prompt
+
+		self.registerCommand 'exit', do
+			ContextHelpers.exit!
+
 		for handler in self.ctxCallbacks
 			handler server.context
 

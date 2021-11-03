@@ -48,6 +48,8 @@ To clear the `imba-shell`, use the `clear` helper:
 >>> clear!
 ```
 
+> You can also use the `.clear` command.
+
 ### Exit
 
 To exit out of `imba-shell`, use the `exit` helper:
@@ -55,6 +57,8 @@ To exit out of `imba-shell`, use the `exit` helper:
 ```bash
 >>> exit!
 ```
+
+> You can also use the `.exit` command.
 
 ## Programmable API
 

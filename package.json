@@ -1,6 +1,6 @@
 {
 	"name": "imba-shell",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Interactive debugger and REPL for Imba.",
 	"keywords": [
 		"imba",
@@ -30,7 +30,7 @@
 		"imbas": "./bin/run"
 	},
 	"dependencies": {
-		"imba": "^2.0.0-alpha.183"
+		"imba": "^2.0.0-alpha.186"
 	},
 	"devDependencies": {
 		"@types/jest": "^27.0.2",
