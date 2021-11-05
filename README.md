@@ -38,7 +38,11 @@ To use multi-line mode, use the .editor command:
 
 This will open a multi-line editor.
 
-> Note, to insert tabs, use `Shift+Tab`.
+#### Indentation
+
+When using multi-line mode, you can use the `Shift+Tab` key combination to indent the current line.
+
+To remove a tab, use the `Backspace` key.
 
 ### Clear
 
