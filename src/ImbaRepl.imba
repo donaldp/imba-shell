@@ -84,4 +84,7 @@ export default class ImbaRepl
 
 		server.sessionId = sessionId
 
+		server.input.on 'keypress', do(chunk, key)
+			if key.name == 'tab' && key.shift then server.write '\t'
+
 		server

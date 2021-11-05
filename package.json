@@ -1,6 +1,6 @@
 {
 	"name": "imba-shell",
-	"version": "0.0.8",
+	"version": "0.1.0",
 	"description": "Interactive debugger and REPL for Imba.",
 	"keywords": [
 		"imba",
