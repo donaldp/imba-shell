@@ -38,7 +38,7 @@ To use multi-line mode, use the .editor command:
 
 This will open a multi-line editor.
 
-> Note, for tabs, always use 4 spaces. Imba Shell will convert these spaces into tabs. 4 spaces = 1 tab.
+> Note, to insert tabs, use `Shift+Tab`.
 
 ### Clear
 
