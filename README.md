@@ -124,7 +124,7 @@ Imba:
 
 ```py
 repl.registerCommand 'goodbye', do
-	console.log "Goodbye!"
+	console.log 'Goodbye!'
 	this.close!
 
 ```
@@ -133,7 +133,7 @@ JavaScript:
 
 ```py
 repl.registerCommand('goodbye', () => {
-	console.log("Goodbye!');
+	console.log('Goodbye!');
 	this.close();
 });
 
