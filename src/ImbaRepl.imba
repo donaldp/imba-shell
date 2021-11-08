@@ -5,11 +5,13 @@ import ImbaRunner from './ImbaRunner'
 import os from 'os'
 import path from 'path'
 import repl from 'repl'
+import UpdateNotifier from './UpdateNotifier'
 
 export default class ImbaRepl
 
 	prop ctxCallbacks\Array = []
 	prop cmdCallbacks\Array = []
+	prop update\Boolean|Function = null
 	prop prompt\String = '>>> '
 	prop historyPath\String = null
 
@@ -39,11 +41,21 @@ export default class ImbaRepl
 
 		self
 
+	def shouldUpdate callback\Function = null
+		if callback && typeof callback !== 'function'
+			throw new TypeError 'Expected callback to be a Function.'
+
+		self.update = callback ? callback : true
+
+		self
+
 	def run options\Object = {}
 		if options !== null && (options !== null && typeof options === 'object' && Array.isArray(options) === false) !== true
 			throw new TypeError 'Expected repl options to be an Object.'
 
 		console.log "Imba Shell v{version} (imba {ImbaRunner.version}) by {author}"
+
+		if self.update then (new UpdateNotifier).check self.update
 
 		const server = await repl.start { ...{ prompt: self.prompt }, ...options }
 

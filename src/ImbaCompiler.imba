@@ -1,4 +1,5 @@
 import { execSync } from 'child_process'
+import { name } from '../package.json'
 import fs from 'fs'
 import ImbaRunner from './ImbaRunner'
 import os from 'os'
@@ -23,7 +24,7 @@ export default class ImbaCompiler
 		new ImbaCompiler code, sessionId
 
 	def get
-		const directory\String = path.join os.homedir!, '.imba-shell'
+		const directory\String = path.join os.homedir!, ".{name}"
 
 		if !fs.existsSync(directory)
 			fs.mkdirSync(directory, { recursive: true })
