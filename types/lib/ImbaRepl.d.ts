@@ -8,7 +8,6 @@ declare class ImbaRepl {
     constructor(prompt?: string, historyPath?: string | null);
     ctxCallbacks: any;
     cmdCallbacks: any;
-    update: any;
     prompt: string;
     historyPath: string;
     /**
@@ -20,10 +19,6 @@ declare class ImbaRepl {
     @param {Function} callback
     */
     registerCommand(name: string, callback: Function): ImbaRepl;
-    /**
-    @param {Function} callback
-    */
-    shouldUpdate(callback?: Function): ImbaRepl;
     /**
     @param {Object} options
     */
