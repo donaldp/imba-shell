@@ -11,6 +11,8 @@ export default class UpdateNotifier
 	prop directory\String = path.join os.homedir!, ".{name}"
 
 	def constructor
+		if !fs.existsSync(self.directory) then fs.mkdirSync self.directory
+
 		if self.shouldFetchLatestVersion!
 			self.fetchLatestVersion!
 
@@ -54,7 +56,11 @@ export default class UpdateNotifier
 		request.on 'error' do return
 
 	def storeVersion data\String
-		fs.writeFileSync path.join(directory, 'latest.json'), data
+		const latestPath = path.join(directory, 'latest.json')
+
+		if fs.existsSync(latestPath) then fs.unlinkSync(latestPath)
+
+		fs.writeFileSync(latestPath, data)
 
 	def check callback\Function|Boolean = null
 		if !fs.existsSync(path.join(self.directory, 'latest.json')) then return
