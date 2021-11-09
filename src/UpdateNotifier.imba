@@ -17,7 +17,7 @@ export default class UpdateNotifier
 			self.fetchLatestVersion!
 
 	def shouldFetchLatestVersion
-		const file = path.join directory, 'latest.json'
+		const file = path.join self.directory, 'latest.json'
 
 		if !fs.existsSync file then return true
 
@@ -56,9 +56,7 @@ export default class UpdateNotifier
 		request.on 'error' do return
 
 	def storeVersion data\String
-		const latestPath = path.join(directory, 'latest.json')
-
-		if fs.existsSync(latestPath) then fs.unlinkSync(latestPath)
+		const latestPath = path.join(self.directory, 'latest.json')
 
 		fs.writeFileSync(latestPath, data)
 
