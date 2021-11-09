@@ -53,7 +53,7 @@ export default class ImbaRepl
 		if options !== null && (options !== null && typeof options === 'object' && Array.isArray(options) === false) !== true
 			throw new TypeError 'Expected repl options to be an Object.'
 
-		console.log "Imba Shell v{version} (imba {ImbaRunner.version}) by {author}"
+		console.log "Imba Shell v{version} (imba {ImbaRunner.version}) by Donald Pakkies"
 
 		if self.update then (new UpdateNotifier).check self.update
 
