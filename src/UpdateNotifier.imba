@@ -75,8 +75,8 @@ export default class UpdateNotifier
 		const repeat = do(char\String) char.repeat(name.length * 2)
 
 		console.log '┌─────────────────────────────────────────────────────' + repeat('─') + '─┐'
-		console.log '│                                                      ' + repeat(' ') + '|'
-		console.log "│  New version available: v{response.latest} (current: v{version})     " + repeat(' ') + '|'
-		console.log "│  Run \u001B[32mnpm install -g {name}\u001B[0m or \u001B[32myarn global add {name}\u001B[0m to update!  |"
-		console.log '|                                                      ' + repeat(' ') + '|'
+		console.log '│                                                      ' + repeat(' ') + '│'
+		console.log "│  New version available: v{response.latest} (current: v{version})     " + repeat(' ') + '│'
+		console.log "│  Run \u001B[32mnpm install -g {name}\u001B[0m or \u001B[32myarn global add {name}\u001B[0m to update!  │"
+		console.log '│                                                      ' + repeat(' ') + '│'
 		console.log '└──────────────────────────────────────────────────────' + repeat('─') + '┘'
