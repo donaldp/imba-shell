@@ -1,5 +1,9 @@
 # Imba Shell
 
+![Status](https://github.com/donaldp/imba-shell/actions/workflows/test.yml/badge.svg)
+![npm](https://img.shields.io/npm/v/imba-shell)
+![GitHub](https://img.shields.io/github/license/donaldp/imba-shell)
+
 Interactive debugger and REPL for Imba.
 
 ![imba-shell](https://raw.githubusercontent.com/donaldp/imba-shell/main/shell.gif)
@@ -64,7 +68,47 @@ To exit out of `imba-shell`, use the `exit` helper:
 
 > You can also use the `.exit` command.
 
-## Programmable API
+### Imba Runtime
+
+You may use `imba-shell` as a runtime:
+
+```bash
+imbar file.imba
+```
+
+> `imbar` aliases: `imba-r`, `imba-runtime`, `ir` .
+
+Passing arguments to your script:
+
+```bash
+imbar craftsman.imba mail:send --help
+```
+
+Creating a self executing script:
+
+#### **`hello.imba`**
+```py
+#!/usr/bin/env imbar
+
+const name = process.argv.slice(2)[0] ?? 'stranger'
+
+console.log "Hello {name}"
+```
+
+If you're using `Linux`, `FreeBSD` or `MacOS`, you can make your script executable:
+
+```bash
+chmod u+x hello.imba
+```
+
+Running the script:
+
+```bash
+./hello.imba Donald    # Hello Donald
+./hello.imba           # Hello stranger
+```
+
+## API
 
 `imba-shell` can also be used as a module. Here's an example:
 
@@ -177,6 +221,30 @@ Todo
 - &#9745; Extensible API.
 - &#9746; Syntax highlighting.
 - &#9746; Imba Compile Errors.
+
+Development
+-----
+
+### Install
+
+Install dependencies:
+```bash
+$ npm i
+```
+
+### Build
+
+Build from source:
+```bash
+$ npm run build
+```
+
+### Test
+
+Test `Imba-Shell`:
+```bash
+$ npm run test
+```
 
 Security
 -------

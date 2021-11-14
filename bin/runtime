@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const { Command } = require('../lib');
+
+class RuntimeCommand extends Command {
+	get isRuntime() {
+		return true;
+	}
+}
+
+(new RuntimeCommand).run();
