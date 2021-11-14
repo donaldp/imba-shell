@@ -1,5 +1,9 @@
 # Imba Shell
 
+![Status](https://github.com/donaldp/imba-shell/actions/workflows/test.yml/badge.svg)
+![npm](https://img.shields.io/npm/v/imba-shell)
+![GitHub](https://img.shields.io/github/license/donaldp/imba-shell)
+
 Interactive debugger and REPL for Imba.
 
 ![imba-shell](https://raw.githubusercontent.com/donaldp/imba-shell/main/shell.gif)
@@ -218,11 +222,6 @@ Todo
 - &#9746; Syntax highlighting.
 - &#9746; Imba Compile Errors.
 
-Security
--------
-
-If you discover any security related issues, please email donaldpakkies@gmail.com instead of using the issue tracker.
-
 Development
 -----
 
@@ -246,6 +245,11 @@ Test `Imba-Shell`:
 ```bash
 $ npm run test
 ```
+
+Security
+-------
+
+If you discover any security related issues, please email donaldpakkies@gmail.com instead of using the issue tracker.
 
 License
 -------
