@@ -34,7 +34,7 @@
 		"ir": "./bin/runtime"
 	},
 	"dependencies": {
-		"imba": "^2.0.0-alpha.186"
+		"imba": "^2.0.0-alpha.199"
 	},
 	"devDependencies": {
 		"@types/jest": "^27.0.2",
