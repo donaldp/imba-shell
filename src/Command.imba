@@ -1,8 +1,12 @@
 import { existsSync } from 'fs'
+import { copyFileSync } from 'fs'
+import { unlinkSync } from 'fs'
 import { join } from 'path'
-import { spawn } from 'child_process'
+import { dirname } from 'path'
+import { basename } from 'path'
+import { spawnSync } from 'child_process'
 import { version } from '../package.json'
-import ImbaRunner from '../lib/ImbaRunner'
+import ImbaRunner from './ImbaRunner'
 
 export default class Command
 
@@ -52,11 +56,32 @@ export default class Command
 		self.invalidCommand!
 
 	def exec
+		const fallbackScript = self.createFallbackScript!
+
 		self.args.splice 1, 0, '--'
 
-		spawn("{ImbaRunner.instance!.slice(0, -1)}", self.args, { stdio: 'inherit', cwd: process.cwd! })
+		spawnSync("{ImbaRunner.instance!.slice(0, -1)}", self.args, {
+			stdio: 'inherit',
+			cwd: process.cwd!
+		})
+
+		if fallbackScript !== null then unlinkSync(fallbackScript)
+
+	def createFallbackScript
+		let sourceScript = null
+		let fallbackScript = null
+
+		if !self.args[0].endsWith('.imba')
+			sourceScript = join(process.cwd!, self.args[0])
+			fallbackScript = join(process.cwd!, dirname(self.args[0]), ".{basename(self.args[0])}.imba")
+
+			try
+				copyFileSync(sourceScript, fallbackScript)
+				self.args[0] = join(dirname(self.args[0]), ".{basename(self.args[0])}.imba")
+			catch e
+				fallbackScript = null
+		
+		fallbackScript
 
 	def handle
 		null
-
-
