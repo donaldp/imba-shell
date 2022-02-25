@@ -86,7 +86,7 @@ imbar craftsman.imba mail:send --help
 
 Creating a self executing script:
 
-#### **`hello.imba`**
+#### **`hello`**
 ```py
 #!/usr/bin/env imbar
 
@@ -98,14 +98,14 @@ console.log "Hello {name}"
 If you're using `Linux`, `FreeBSD` or `MacOS`, you can make your script executable:
 
 ```bash
-chmod u+x hello.imba
+chmod u+x hello
 ```
 
 Running the script:
 
 ```bash
-./hello.imba Donald    # Hello Donald
-./hello.imba           # Hello stranger
+./hello Donald    # Hello Donald
+./hello           # Hello stranger
 ```
 
 ## API
