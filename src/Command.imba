@@ -2,6 +2,8 @@ import { existsSync } from 'fs'
 import { copyFileSync } from 'fs'
 import { unlinkSync } from 'fs'
 import { join } from 'path'
+import { dirname } from 'path'
+import { basename } from 'path'
 import { spawnSync } from 'child_process'
 import { version } from '../package.json'
 import ImbaRunner from './ImbaRunner'
@@ -71,12 +73,12 @@ export default class Command
 
 		if !self.args[0].endsWith('.imba')
 			sourceScript = join(process.cwd!, self.args[0])
-			fallbackScript = join(process.cwd!, ".{self.args[0]}.imba")
+			fallbackScript = join(process.cwd!, dirname(self.args[0]), ".{basename(self.args[0])}.imba")
 
 			try
 				copyFileSync(sourceScript, fallbackScript)
-				self.args[0] = ".{self.args[0]}.imba"
-			catch
+				self.args[0] = join(dirname(self.args[0]), ".{basename(self.args[0])}.imba")
+			catch e
 				fallbackScript = null
 		
 		fallbackScript
