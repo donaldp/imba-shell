@@ -25,6 +25,7 @@ describe('bin/Runtime', () => {
 	it('should execute Imba script.', () => {
 		expect(execSync('./bin/runtime ./test/bin/hello.imba').toString()).toContain('Hello stranger');
 		expect(execSync('./bin/runtime ./test/bin/hello.imba Donald').toString()).toContain('Hello Donald');
+		expect(execSync('./bin/runtime ./test/bin/hello Donald').toString()).toContain('Hello Donald');
 	});
 
 	it('should output help if script name is missing.', () => {
