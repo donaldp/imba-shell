@@ -71,7 +71,11 @@ export default class Command
 
 		self.args.splice 1, 0, '--'
 
-		spawnSync("{ImbaRunner.instance!.slice(0, -1)}", [self.watch ? '-w' : '', ...self.args], {
+		const watcher = []
+
+		if self.watch then watcher.push '-w'
+
+		spawnSync("{ImbaRunner.instance!.slice(0, -1)}", [...watcher, ...self.args], {
 			stdio: 'inherit',
 			cwd: process.cwd!
 		})
