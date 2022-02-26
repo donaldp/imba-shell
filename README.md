@@ -84,6 +84,16 @@ Passing arguments to your script:
 imbar craftsman.imba mail:send --help
 ```
 
+Continously build and watch project (development purposes):
+
+```bash
+imbar --watch server.imba
+```
+
+> flag: `--watch`
+
+> alias: `-w`
+
 Creating a self executing script:
 
 #### **`hello`**
@@ -100,6 +110,8 @@ If you're using `Linux`, `FreeBSD` or `MacOS`, you can make your script executab
 ```bash
 chmod u+x hello
 ```
+
+> Note: when creating a script that doesn't end with `".imba"`, the Imba Runtime will clone your script into a hidden file that ends with `.imba` and execute it instead of your original script. When done executing, the hidden file will be removed.
 
 Running the script:
 

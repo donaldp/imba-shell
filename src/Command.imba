@@ -12,11 +12,18 @@ export default class Command
 
 	prop args\String[] = []
 
+	prop watch\Boolean = false
+
 	get isRuntime
 		false
 
 	def constructor
 		self.args = process.argv.slice(2)
+
+	def enableWatcher
+		self.watch = true
+
+		self.args = self.args.filter do(arg) !['-w', '--watch'].includes(arg)
 
 	def printVersion
 		console.log "Imba Shell v{version} (imba {ImbaRunner.version})"
@@ -27,6 +34,7 @@ export default class Command
 		console.log "\x1b[32mOptions:\x1b[0m"
 		console.log "  \x1b[32m-v, --version\x1b[0m         Display help"
 		console.log "  \x1b[32m-h, --help\x1b[0m            Display this application version"
+		console.log "  \x1b[32m-w, --watch\x1b[0m           Continously build and watch project"
 
 	def invalidCommand
 		console.log "The \"{self.args[0]}\" option does not exist."
@@ -35,9 +43,12 @@ export default class Command
 
 	def run
 		if self.isRuntime
-			if !args[0] then return self.displayHelp!
+			if args[0] && (args[0].trim! == '--watch' || args[0].trim! == '-w')
+				self.enableWatcher!
 
-			if !existsSync(join(process.cwd!, args[0])) && !args[0].trim!.startsWith('-')
+			if self.watch == false && !args[0] then return self.displayHelp!
+
+			if (args[0] == undefined && self.watch) || (!existsSync(join(process.cwd!, args[0])) && !args[0].trim!.startsWith('-'))
 				console.log 'Error: Script missing.'
 
 				process.exit 1
@@ -60,7 +71,11 @@ export default class Command
 
 		self.args.splice 1, 0, '--'
 
-		spawnSync("{ImbaRunner.instance!.slice(0, -1)}", self.args, {
+		const watcher = []
+
+		if self.watch then watcher.push '-w'
+
+		spawnSync("{ImbaRunner.instance!.slice(0, -1)}", [...watcher, ...self.args], {
 			stdio: 'inherit',
 			cwd: process.cwd!
 		})
