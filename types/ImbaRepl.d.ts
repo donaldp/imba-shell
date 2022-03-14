@@ -28,6 +28,6 @@ declare class ImbaRepl {
     @param {Object} options
     */
     run(options?: any): Promise<any>;
-    [Ψ__init__]($$?: any): void;
+    [$9]($$?: any): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $9: unique symbol;

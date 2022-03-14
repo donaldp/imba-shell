@@ -12,6 +12,6 @@ declare class Command {
     exec(): void;
     createFallbackScript(): string;
     handle(): any;
-    [Ψ__init__]($$?: any): void;
+    [$10]($$?: any): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $10: unique symbol;
