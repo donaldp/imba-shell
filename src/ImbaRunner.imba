@@ -5,17 +5,22 @@ import path from 'path'
 
 export default class ImbaRunner
 
+	static get ext
+		process.platform === 'win32' ? '.cmd' : ''
+
 	static get imba
-		const local\String = path.join(process.cwd!, 'node_modules', '.bin', 'imbac')
-		const onboard\String = path.join(__dirname, '..', 'node_modules', '.bin', 'imbac')
+		const local\String = path.join(process.cwd!, 'node_modules', '.bin', 'imba')
+		const onboard\String = path.join(__dirname, '..', 'node_modules', '.bin', 'imba')
 
 		fs.existsSync(local) ? local : onboard
 
-	static def instance
-		if !fs.existsSync(self.imba)
-			throw new ImbaMissingException `Imba not found at ${self.imba}`
+	static def instance compiler\Boolean = false
+		const file = self.imba + (compiler ? 'c' : '') + self.ext
 
-		self.imba
+		if !fs.existsSync(file)
+			throw new ImbaMissingException `Imba not found at ${file}`
+
+		file
 
 	static get version
-		execSync("{self.instance!} -v").toString!.trim!
+		execSync("{self.instance(true)} -v").toString!.trim!
