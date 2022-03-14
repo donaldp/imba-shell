@@ -69,13 +69,16 @@ export default class Command
 	def exec
 		const fallbackScript = self.createFallbackScript!
 
+		if process.platform === 'win32'
+			self.args[0] = fallbackScript || join(process.cwd!, self.args[0])
+
 		self.args.splice 1, 0, '--'
 
 		const watcher = []
 
 		if self.watch then watcher.push '-w'
 
-		spawnSync("{ImbaRunner.instance!.slice(0, -1)}", [...watcher, ...self.args], {
+		spawnSync("{ImbaRunner.instance!}", [...watcher, ...self.args], {
 			stdio: 'inherit',
 			cwd: process.cwd!
 		})

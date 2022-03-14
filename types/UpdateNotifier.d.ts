@@ -17,6 +17,6 @@ declare class UpdateNotifier {
     @param {Function|Boolean} callback
     */
     check(callback?: Function | boolean): any;
-    [Ψ__init__]($$?: any): void;
+    [$6]($$?: any): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $6: unique symbol;

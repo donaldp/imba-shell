@@ -31,7 +31,7 @@ export default class ImbaCompiler
 
 		fs.writeFileSync(path.join(directory, self.sessionId), self.code.trim!)
 
-		const results\Buffer = execSync("{ImbaRunner.instance!} {path.join(directory, self.sessionId)} --platform=node --format=cjs --print")
+		const results\Buffer = execSync("{ImbaRunner.instance(true)} {path.join(directory, self.sessionId)} --platform=node --format=cjs --print")
 
 		fs.rmSync(path.join(directory, self.sessionId))
 

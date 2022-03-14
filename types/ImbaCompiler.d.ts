@@ -14,6 +14,6 @@ declare class ImbaCompiler {
     code: string;
     sessionId: string;
     get(): string;
-    [Ψ__init__]($$?: any): void;
+    [$7]($$?: any): void;
 }
-declare const Ψ__init__: unique symbol;
+declare const $7: unique symbol;
