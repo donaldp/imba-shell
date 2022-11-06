@@ -18,10 +18,8 @@
 	"repository": "https://github.com/donaldp/imba-shell",
 	"scripts": {
 		"build": "npm run imba:build && npm run ts:build",
-		"imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
-		"imba:watch": "imbac -w src --output=lib --platform=node --format=cjs --clean",
+		"imba:build": "imba build src/index.imba --platform=node --outdir=lib -f -M -S",
 		"ts:build": "tsc",
-		"ts:watch": "tsc -w",
 		"test": "jest --roots test",
 		"test:watch": "jest --watchAll --roots test"
 	},
@@ -34,12 +32,12 @@
 		"ir": "./bin/runtime"
 	},
 	"dependencies": {
-		"imba": "^2.0.0-alpha.204"
+		"imba": "^2.0.0-alpha.225"
 	},
 	"devDependencies": {
-		"@types/jest": "^27.4.1",
-		"@types/node": "^17.0.21",
-		"jest": "^27.5.1",
-		"typescript": "^4.5.5"
+		"@types/jest": "^29.2.2",
+		"@types/node": "^18.11.9",
+		"jest": "^29.2.2",
+		"typescript": "^4.8.4"
 	}
 }
