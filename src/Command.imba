@@ -78,10 +78,20 @@ export default class Command
 
 		if self.watch then watcher.push '-w'
 
-		spawnSync("{ImbaRunner.instance!}", [...watcher, ...self.args], {
+		const options = {
 			stdio: 'inherit',
 			cwd: process.cwd!
-		})
+		}
+
+		if process.platform === 'win32'
+			const sh = process.env.comspec || 'cmd'
+			const shFlag = '/d /s /c'
+
+			options.windowsVerbatimArguments = true
+
+			spawnSync(sh, [ shFlag, ImbaRunner.instance!, [ ...watcher, ...self.args ] ], options)
+		else
+			spawnSync(ImbaRunner.instance!, [ ...watcher, ...self.args ], options)
 
 		if fallbackScript !== null then unlinkSync(fallbackScript)
 
@@ -89,7 +99,7 @@ export default class Command
 		let sourceScript = null
 		let fallbackScript = null
 
-		if !self.args[0].endsWith('.imba')
+		if !(self.args[0].endsWith('.imba') || self.args[0].endsWith('.ts'))
 			sourceScript = join(process.cwd!, self.args[0])
 			fallbackScript = join(process.cwd!, dirname(self.args[0]), ".{basename(self.args[0])}.imba")
 
@@ -98,7 +108,7 @@ export default class Command
 				self.args[0] = join(dirname(self.args[0]), ".{basename(self.args[0])}.imba")
 			catch e
 				fallbackScript = null
-		
+
 		fallbackScript
 
 	def handle
