@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 import fs from 'fs'
-import ImbaMissingException from './Error/ImbaMissingException'
+import ImbaMissingException from './Errors/ImbaMissingException'
 import path from 'path'
 
 export default class ImbaRunner
