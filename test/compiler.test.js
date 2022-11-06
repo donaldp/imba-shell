@@ -14,7 +14,7 @@ describe('src/ImbaCompiler', () => {
 		expect(ImbaCompiler.code('console.log "Hello World!"', sessionId).get()).toContain('console.log("Hello World!")');
 	});
 
-	it('should compile Imba ESM script to CommonJS.', () => {
+	test.skip('should compile Imba ESM script to CommonJS.', () => {
 		const sessionId = String(new Date().valueOf());
 
 		expect(ImbaCompiler.code('import imba from "imba"', sessionId).get()).toContain('requireDefault$__(require(\"imba\"/*$path$*/))');
