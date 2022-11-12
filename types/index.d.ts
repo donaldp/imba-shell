@@ -15,23 +15,12 @@ export var Command: {
         handle(): any;
     };
 };
-export var ImbaCompiler: {
-    new (code: any, sessionId: any): {
-        code: string;
-        sessionId: string;
-        get(): string;
-    };
-    code(code: any, sessionId: any): {
-        code: string;
-        sessionId: string;
-        get(): string;
-    };
-};
 export var ImbaRepl: {
-    new (prompt?: string, historyPath?: any): {
+    new (language?: string, prompt?: string, historyPath?: any): {
         ctxCallbacks: any;
         cmdCallbacks: any;
         update: any;
+        language: string;
         prompt: string;
         historyPath: any;
         registerCallback(callback: any): any;
@@ -39,13 +28,6 @@ export var ImbaRepl: {
         shouldUpdate(callback?: any): any;
         run(options?: {}): Promise<any>;
     };
-};
-export var ImbaRunner: {
-    new (): {};
-    readonly ext: "" | ".cmd";
-    readonly imba: any;
-    instance(compiler?: boolean): string;
-    readonly version: string;
 };
 export var UpdateNotifier: {
     new (): {
