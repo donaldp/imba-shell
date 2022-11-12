@@ -1,6 +1,6 @@
-const { ImbaCompiler } = require('../lib');
+const { ImbaCompiler } = require('../lib/Compilers');
 
-describe('src/ImbaCompiler', () => {
+describe('src/Compilers/ImbaCompiler', () => {
 
 	it('should expect code to be of type string.', () => {
 		expect(() => {
@@ -12,12 +12,6 @@ describe('src/ImbaCompiler', () => {
 		const sessionId = String(new Date().valueOf());
 
 		expect(ImbaCompiler.code('console.log "Hello World!"', sessionId).get()).toContain('console.log("Hello World!")');
-	});
-
-	test.skip('should compile Imba ESM script to CommonJS.', () => {
-		const sessionId = String(new Date().valueOf());
-
-		expect(ImbaCompiler.code('import imba from "imba"', sessionId).get()).toContain('requireDefault$__(require(\"imba\"/*$path$*/))');
 	});
 
 })
