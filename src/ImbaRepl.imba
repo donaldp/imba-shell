@@ -1,27 +1,36 @@
 import { author, version } from '../package.json'
+import { ImbaCompiler, TypeScriptCompiler } from './Compilers'
+import { InvalidLanguageException } from './Errors'
 import * as ContextHelpers from './ContextHelpers'
-import ImbaCompiler from './ImbaCompiler'
-import ImbaRunner from './ImbaRunner'
+import { ImbaRunner, TypeScriptRunner } from './Runners'
 import os from 'os'
 import path from 'path'
-import repl from 'repl'
+import repl from 'node:repl'
 import UpdateNotifier from './UpdateNotifier'
 
 export default class ImbaRepl
 
-	prop ctxCallbacks\Array = []
-	prop cmdCallbacks\Array = []
-	prop update\Boolean|Function = null
-	prop prompt\String = '>>> '
-	prop historyPath\String = null
+	prop ctxCallbacks\Array<Function> = []
+	prop cmdCallbacks\Array<Function> = []
+	prop update\boolean|Function = null
+	prop language\string = 'imba'
+	prop prompt\string = '>>> '
+	prop historyPath\string = null
 
-	def constructor prompt\String = '>>> ', historyPath\String|null = null
+	def constructor language\string = 'imba', prompt\string = '>>> ', historyPath\string = null
+		if typeof language !== 'string'
+			throw new TypeError 'Expected language to be a String.'
+
+		if !['imba', 'typescript'].includes(language.toLowerCase!)
+			throw new InvalidLanguageException 'Expected language to be "imba" or "typescript".'
+
 		if typeof prompt !== 'string'
 			throw new TypeError 'Expected prompt to be a String.'
 
 		if historyPath && typeof historyPath !== 'string'
 			throw new TypeError 'Expected historyPath to be a String.'
 
+		self.language = language.toLowerCase!
 		self.prompt = prompt
 		self.historyPath = historyPath
 
@@ -33,7 +42,7 @@ export default class ImbaRepl
 
 		self
 
-	def registerCommand name\String, callback\Function
+	def registerCommand name\string, callback\Function
 		if typeof name !== 'string'
 			throw new TypeError 'Expected command name to be a String.'
 
@@ -49,11 +58,13 @@ export default class ImbaRepl
 
 		self
 
-	def run options\Object = {}
+	def run options\object = {}
 		if options !== null && (options !== null && typeof options === 'object' && Array.isArray(options) === false) !== true
 			throw new TypeError 'Expected repl options to be an Object.'
 
-		console.log "Imba Shell v{version} (imba {ImbaRunner.version}) by Donald Pakkies"
+		const compilerVersion\string = self.language == 'imba' ? "imba {ImbaRunner.version}" : "typescript {TypeScriptRunner.version}"
+
+		console.log "Imba Shell v{version} ({compilerVersion}) by Donald Pakkies"
 
 		if self.update then (new UpdateNotifier).check self.update
 
@@ -84,9 +95,9 @@ export default class ImbaRepl
 		const sessionId = String new Date!.valueOf!
 
 		server.eval = do(cmd, context, file, cb)
-			const compiledCode = ImbaCompiler.code(cmd, sessionId).get!
+			const compiledCode = self.language == 'imba' ? ImbaCompiler.code(cmd, sessionId).get! : TypeScriptCompiler.code(cmd, sessionId).get!
 
-			cmdEval(compiledCode, context, file, do(error, results)
+			cmdEval(compiledCode || '', context, file, do(error, results)
 				if error then return cb(error)
 
 				try cb(null, await Promise.resolve(results))
