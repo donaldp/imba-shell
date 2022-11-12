@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 import fs from 'fs'
-import ImbaMissingException from './Errors/ImbaMissingException'
+import ImbaMissingException from '../Errors/ImbaMissingException'
 import path from 'path'
 
 export default class ImbaRunner
@@ -9,8 +9,8 @@ export default class ImbaRunner
 		process.platform === 'win32' ? '.cmd' : ''
 
 	static get imba
-		const local\String = path.join(process.cwd!, 'node_modules', '.bin', 'imba')
-		const onboard\String = path.join(__dirname, '..', 'node_modules', '.bin', 'imba')
+		const local\string = path.join(process.cwd!, 'node_modules', '.bin', 'imba')
+		const onboard\string = path.join(__dirname, '..', 'node_modules', '.bin', 'imba')
 
 		fs.existsSync(local) ? local : onboard
 
