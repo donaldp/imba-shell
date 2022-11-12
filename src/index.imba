@@ -1,15 +1,17 @@
+import * as Compilers from './Compilers'
 import * as ContextHelpers from './ContextHelpers'
+import * as Errors from './Errors'
+import * as Runners from './Runners'
 import Command from './Command'
-import ImbaCompiler from './ImbaCompiler'
 import ImbaRepl from './ImbaRepl'
-import ImbaRunner from './ImbaRunner'
 import UpdateNotifier from './UpdateNotifier'
 
 export {
 	Command
+	Compilers
 	ContextHelpers
-	ImbaCompiler
+	Errors
 	ImbaRepl
-	ImbaRunner
+	Runners
 	UpdateNotifier
 }

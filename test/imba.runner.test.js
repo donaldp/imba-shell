@@ -1,6 +1,6 @@
-const { ImbaRunner } = require('../lib');
+const { ImbaRunner } = require('../lib/Runners');
 
-describe('src/ImbaRunner', () => {
+describe('src/Runners/ImbaRunner', () => {
 
 	it('should return imba version.', () => {
 		expect(ImbaRunner.version).toContain('.');

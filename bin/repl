@@ -6,19 +6,24 @@ const os = require('os');
 const path = require('path');
 
 class ReplCommand extends Command {
-	handle() {
-		const repl = new ImbaRepl('>>> ', path.join(os.homedir(), '.imba_shell_history'));
+	/**
+	 * @param {string} language
+	 */
+	handle(language) {
+		const repl = new ImbaRepl(language, '>>> ', path.join(os.homedir(), '.imba_shell_history'));
 
-		/** load imba. */
-		repl.registerCallback((ctx) => {
-			Object.keys(imba).forEach((key) => {
-				if (!ctx[key]) {
-					ctx[key] = imba[key];
-				}
+		if (language == 'imba') {
+			/** load imba. */
+			repl.registerCallback((ctx) => {
+				Object.keys(imba).forEach((key) => {
+					if (!ctx[key]) {
+						ctx[key] = imba[key];
+					}
+				});
 			});
-		});
+		}
 
-		repl.shouldUpdate().run({ ignoreUndefined: true });
+		repl.shouldUpdate().run({ ignoreUndefined: true, useColors: language == 'typescript' });
 	}
 }
 

@@ -1,18 +1,14 @@
-import { existsSync } from 'fs'
-import { copyFileSync } from 'fs'
-import { unlinkSync } from 'fs'
-import { join } from 'path'
-import { dirname } from 'path'
-import { basename } from 'path'
+import { existsSync, copyFileSync, unlinkSync } from 'fs'
+import { ImbaRunner } from './Runners'
+import { join, dirname, basename } from 'path'
 import { spawnSync } from 'child_process'
 import { version } from '../package.json'
-import ImbaRunner from './ImbaRunner'
 
 export default class Command
 
-	prop args\String[] = []
+	prop args\string[] = []
 
-	prop watch\Boolean = false
+	prop watch\boolean = false
 
 	get isRuntime
 		false
@@ -29,12 +25,19 @@ export default class Command
 		console.log "Imba Shell v{version} (imba {ImbaRunner.version})"
 
 	def displayHelp
-		console.log "\x1b[32mUsage:\x1b[0m\n  [\x1b[2m<script>\x1b[0m] [options]\n"
+		if self.isRuntime
+			console.log "\x1b[32mUsage:\x1b[0m\n  [options] [\x1b[2m<script>\x1b[0m]\n"
+		else
+			console.log "\x1b[32mUsage:\x1b[0m\n  \x1b[2mimba-shell\x1b[0m [options]\n"
 
 		console.log "\x1b[32mOptions:\x1b[0m"
-		console.log "  \x1b[32m-v, --version\x1b[0m         Display help"
-		console.log "  \x1b[32m-h, --help\x1b[0m            Display this application version"
-		console.log "  \x1b[32m-w, --watch\x1b[0m           Continously build and watch project"
+		console.log "  \x1b[32m-h, --help\x1b[0m            Display help"
+		console.log "  \x1b[32m-v, --version\x1b[0m         Display this application version"
+
+		if self.isRuntime
+			console.log "  \x1b[32m-w, --watch\x1b[0m           Continously build and watch project"
+		else
+			console.log "  \x1b[32m    --ts\x1b[0m              Run Repl in TypeScript mode"
 
 	def invalidCommand
 		console.log "The \"{self.args[0]}\" option does not exist."
@@ -52,6 +55,9 @@ export default class Command
 				console.log 'Error: Script missing.'
 
 				process.exit 1
+
+		if !self.isRuntime && (args.length == 1 && args[0] == '--ts') || !(args.length > 0)
+			return self.handle(args[0] ? 'typescript' : 'imba')
 
 		if !(args.length > 0) then return self.handle!
 
@@ -78,10 +84,20 @@ export default class Command
 
 		if self.watch then watcher.push '-w'
 
-		spawnSync("{ImbaRunner.instance!}", [...watcher, ...self.args], {
+		const options = {
 			stdio: 'inherit',
 			cwd: process.cwd!
-		})
+		}
+
+		if process.platform === 'win32'
+			const sh = process.env.comspec || 'cmd'
+			const shFlag = '/d /s /c'
+
+			options.windowsVerbatimArguments = true
+
+			spawnSync(sh, [ shFlag, ImbaRunner.instance!, ...watcher, ...self.args ], options)
+		else
+			spawnSync(ImbaRunner.instance!, [ ...watcher, ...self.args ], options)
 
 		if fallbackScript !== null then unlinkSync(fallbackScript)
 
@@ -89,7 +105,7 @@ export default class Command
 		let sourceScript = null
 		let fallbackScript = null
 
-		if !self.args[0].endsWith('.imba')
+		if !(self.args[0].endsWith('.imba') || self.args[0].endsWith('.ts'))
 			sourceScript = join(process.cwd!, self.args[0])
 			fallbackScript = join(process.cwd!, dirname(self.args[0]), ".{basename(self.args[0])}.imba")
 
@@ -98,7 +114,7 @@ export default class Command
 				self.args[0] = join(dirname(self.args[0]), ".{basename(self.args[0])}.imba")
 			catch e
 				fallbackScript = null
-		
+
 		fallbackScript
 
 	def handle
