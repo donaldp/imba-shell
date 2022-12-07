@@ -11,7 +11,7 @@
 	],
 	"author": "Donald Pakkies",
 	"license": "MIT",
-	"main": "lib/index.js",
+	"main": "dist/index.js",
 	"types": "types/index.d.ts",
 	"bugs": "https://github.com/donaldp/imba-shell/issues",
 	"homepage": "https://github.com/donaldp/imba-shell",
