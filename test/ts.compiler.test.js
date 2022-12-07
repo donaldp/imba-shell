@@ -1,4 +1,4 @@
-const { TypeScriptCompiler } = require('../lib/Compilers');
+const { TypeScriptCompiler } = require('../dist/Compilers');
 
 describe('src/Compilers/TypeScriptCompiler', () => {
 

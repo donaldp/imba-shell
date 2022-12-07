@@ -1,4 +1,4 @@
-const { ImbaRepl, Errors } = require('../lib');
+const { ImbaRepl } = require('../dist');
 
 describe('src/ImbaRepl', () => {
 
@@ -19,7 +19,7 @@ describe('src/ImbaRepl', () => {
 	it('should expect repl language to be "imba" or "typescript".', () => {
 		expect(() => {
 			new ImbaRepl('random')
-		}).toThrow(Errors.InvalidLanguageException);
+		}).toThrow(Error);
 	});
 
 	it('should expect repl prompt to be of type string.', () => {

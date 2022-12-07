@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { Command } = require('../lib');
+const { Command } = require('../dist');
 
 class RuntimeCommand extends Command {
 	get isRuntime() {

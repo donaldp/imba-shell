@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { Command, ImbaRepl } = require('../lib');
+const { Command, ImbaRepl } = require('../dist');
 const imba = require('imba');
 const os = require('os');
 const path = require('path');

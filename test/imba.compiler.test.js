@@ -1,4 +1,4 @@
-const { ImbaCompiler } = require('../lib/Compilers');
+const { ImbaCompiler } = require('../dist/Compilers');
 
 describe('src/Compilers/ImbaCompiler', () => {
 

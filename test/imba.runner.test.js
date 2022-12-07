@@ -1,4 +1,4 @@
-const { ImbaRunner } = require('../lib/Runners');
+const { ImbaRunner } = require('../dist/Runners');
 
 describe('src/Runners/ImbaRunner', () => {
 

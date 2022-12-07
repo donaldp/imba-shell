@@ -1,4 +1,4 @@
-const { TypeScriptRunner } = require('../lib/Runners')
+const { TypeScriptRunner } = require('../dist/Runners')
 
 describe('src/Runners/TypeScriptRunner', () => {
 
