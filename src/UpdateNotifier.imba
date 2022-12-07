@@ -7,8 +7,8 @@ import type Version from '../types/Version'
 
 export default class UpdateNotifier
 
-	prop package\String = "https://registry.npmjs.org/-/package/{name}/dist-tags"
-	prop directory\String = path.join os.homedir!, ".{name}"
+	prop package\string = "https://registry.npmjs.org/-/package/{name}/dist-tags"
+	prop directory\string = path.join os.homedir!, ".{name}"
 
 	def constructor
 		if !fs.existsSync(self.directory) then fs.mkdirSync self.directory
@@ -34,7 +34,7 @@ export default class UpdateNotifier
 
 		shouldRefresh
 
-	def compareVersion latestVersion\String
+	def compareVersion latestVersion\string
 		if version.trim! == latestVersion.trim! then return 0
 
 		latestVersion.localeCompare(version) == 1
@@ -55,12 +55,12 @@ export default class UpdateNotifier
 
 		request.on 'error' do return
 
-	def storeVersion data\String
+	def storeVersion data\string
 		const latestPath = path.join(self.directory, 'latest.json')
 
 		fs.writeFileSync(latestPath, data)
 
-	def check callback\Function|Boolean = null
+	def check callback\Function|boolean = null
 		if !fs.existsSync(path.join(self.directory, 'latest.json')) then return
 
 		const response\Version = JSON.parse(fs.readFileSync(path.join(self.directory, 'latest.json')).toString!)
@@ -72,7 +72,7 @@ export default class UpdateNotifier
 
 			return callback response
 
-		const repeat = do(char\String) char.repeat(name.length * 2)
+		const repeat = do(char\string) char.repeat(name.length * 2)
 
 		console.log '┌─────────────────────────────────────────────────────' + repeat('─') + '─┐'
 		console.log '│                                                      ' + repeat(' ') + '│'
@@ -80,3 +80,5 @@ export default class UpdateNotifier
 		console.log "│  Run \u001B[32mnpm install -g {name}\u001B[0m or \u001B[32myarn global add {name}\u001B[0m to update!  │"
 		console.log '│                                                      ' + repeat(' ') + '│'
 		console.log '└──────────────────────────────────────────────────────' + repeat('─') + '┘'
+
+		null

@@ -30,6 +30,12 @@ To start using `imba-shell`, run the following command:
 imba-shell
 ```
 
+To enable TypeScript, you can pass the `--ts` flag:
+
+```bash
+imba-shell --ts
+```
+
 > Note, you can also use `imbas` instead of `imba-shell`.
 
 ### Multiline
@@ -129,7 +135,8 @@ Imba:
 ```py
 import { ImbaRepl } from 'imba-shell'
 
-const repl = new ImbaRepl 'imba> '
+# you can also pass "typescript" instead of "imba"
+const repl = new ImbaRepl 'imba', 'imba> '
 
 repl.run!
 ```
@@ -139,7 +146,8 @@ JavaScript:
 ```js
 const { ImbaRepl } = require('imba-shell');
 
-const repl = new ImbaRepl('imba> ');
+/** you can also pass "typescript" instead of "imba" */
+const repl = new ImbaRepl('imba', 'imba> ');
 
 repl.run();
 ```
@@ -157,7 +165,7 @@ import { ImbaRepl } from 'imba-shell'
 import os from 'os'
 import path from 'path'
 
-const repl = new ImbaRepl 'imba> ', path.join(os.homedir!, '.my_repl_history')
+const repl = new ImbaRepl 'imba', 'imba> ', path.join(os.homedir!, '.my_repl_history')
 
 repl.run!
 ```
@@ -169,7 +177,7 @@ const { ImbaRepl } = require('imba-shell');
 const os = require('os');
 const path = require('path');
 
-const repl = new ImbaRepl('imba> ', path.join(os.homedir(), '.my_repl_history'));
+const repl = new ImbaRepl('imba', 'imba> ', path.join(os.homedir(), '.my_repl_history'));
 
 repl.run();
 ```
@@ -227,12 +235,25 @@ When calling `foo` in the REPL, it will return `bar`.
 Todo
 -------
 
-- &#9745; Code completion.
-- &#9745; Multiline Editor.
-- &#9745; Async/Await.
-- &#9745; Extensible API.
-- &#9746; Syntax highlighting.
-- &#9746; Imba Compile Errors.
+- [x] Language Support.
+	- [x] Imba.
+	- [x] TypeScript.
+- [x] Code completion.
+	- [x] Imba.
+	- [x] TypeScript.
+- [x] Multiline Editor.
+	- [x] Imba.
+	- [x] TypeScript.
+- [x] Async/Await.
+	- [x] Imba.
+	- [x] TypeScript.
+- [x] Extensible API.
+- [ ] Syntax highlighting.
+	- [ ] Imba.
+	- [ ] TypeScript.
+- [ ] Compile Errors.
+	- [ ] Imba.
+	- [x] TypeScript.
 
 Development
 -----

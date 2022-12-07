@@ -1,6 +1,6 @@
 {
 	"name": "imba-shell",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"description": "Interactive debugger and REPL for Imba.",
 	"keywords": [
 		"imba",
@@ -17,29 +17,37 @@
 	"homepage": "https://github.com/donaldp/imba-shell",
 	"repository": "https://github.com/donaldp/imba-shell",
 	"scripts": {
-		"build": "npm run imba:build && npm run ts:build",
-		"imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
-		"imba:watch": "imbac -w src --output=lib --platform=node --format=cjs --clean",
-		"ts:build": "tsc",
-		"ts:watch": "tsc -w",
-		"test": "jest --roots test",
-		"test:watch": "jest --watchAll --roots test"
-	},
-	"bin": {
-		"imba-r": "./bin/runtime",
-		"imba-runtime": "./bin/runtime",
-		"imba-shell": "./bin/repl",
-		"imbar": "./bin/runtime",
-		"imbas": "./bin/repl",
-		"ir": "./bin/runtime"
-	},
-	"dependencies": {
-		"imba": "^2.0.0-alpha.204"
-	},
-	"devDependencies": {
-		"@types/jest": "^27.4.1",
-		"@types/node": "^17.0.21",
-		"jest": "^27.5.1",
-		"typescript": "^4.5.5"
-	}
+    "build": "npm run build:entry && npm run build:compilers && npm run build:errors && npm run build:runners && npm run build:update",
+    "build:entry": "imba build src/index.imba --platform node -o dist -s -M",
+    "build:compilers": "imba build src/Compilers/index.imba --bundle --platform node -o dist/Compilers -s -M",
+    "build:errors": "imba build src/Errors/index.imba --bundle --platform node -o dist/Errors -s -M",
+    "build:runners": "imba build src/Runners/index.imba --bundle --platform node -o dist/Runners -s -M",
+    "build:update": "node ./scripts/update.js",
+    "test": "jest --roots test",
+    "test:watch": "jest --watchAll --roots test",
+    "prepare": "npm run build && npm run test"
+  },
+  "bin": {
+    "imba-r": "./bin/runtime",
+    "imba-runtime": "./bin/runtime",
+    "imba-shell": "./bin/repl",
+    "imbar": "./bin/runtime",
+    "imbas": "./bin/repl",
+    "ir": "./bin/runtime"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./Compilers": "./dist/Compilers/index.js",
+    "./Errors": "./dist/Errors/index.js",
+    "./Runners": "./dist/Runners/index.js"
+  },
+  "dependencies": {
+    "imba": "^2.0.0-alpha.225",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.2",
+    "@types/node": "^18.11.9",
+    "jest": "^29.3.1"
+  }
 }

@@ -1,18 +1,30 @@
-const { ImbaRepl } = require('../lib');
+const { ImbaRepl } = require('../dist');
 
 describe('src/ImbaRepl', () => {
 
 	it('should create a repl instance.', () => {
 		expect(new ImbaRepl()).toBeInstanceOf(ImbaRepl);
 
-		expect(new ImbaRepl('imba> ')).toBeInstanceOf(ImbaRepl);
+		expect(new ImbaRepl('imba', 'imba> ')).toBeInstanceOf(ImbaRepl);
 
-		expect(new ImbaRepl('imba> ', '.imba_history')).toBeInstanceOf(ImbaRepl);
+		expect(new ImbaRepl('imba', 'imba> ', '.imba_history')).toBeInstanceOf(ImbaRepl);
+	});
+
+	it('should expect repl language to be of type string.', () => {
+		expect(() => {
+			new ImbaRepl([])
+		}).toThrow(TypeError);
+	});
+
+	it('should expect repl language to be "imba" or "typescript".', () => {
+		expect(() => {
+			new ImbaRepl('random')
+		}).toThrow(Error);
 	});
 
 	it('should expect repl prompt to be of type string.', () => {
 		expect(() => {
-			new ImbaRepl([])
+			new ImbaRepl(null, [])
 		}).toThrow(TypeError);
 	});
 
