@@ -18,7 +18,7 @@ export default class ImbaRunner
 		const file = self.imba + (compiler ? 'c' : '') + self.ext
 
 		if !fs.existsSync(file)
-			throw new ImbaMissingException `Imba not found at ${file}`
+			throw new ImbaMissingException "Imba not found at {file}"
 
 		file
 

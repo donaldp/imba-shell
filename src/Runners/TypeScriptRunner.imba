@@ -15,7 +15,7 @@ export default class TypeScriptRunner
 		const file = self.tsc
 
 		if !fs.existsSync(file)
-			throw new TypeScriptMissingException `tsc not found at ${file}`
+			throw new TypeScriptMissingException "tsc not found at {file}"
 
 		file
 
