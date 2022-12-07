@@ -3,7 +3,7 @@ import fs from 'fs'
 import os from 'os'
 import path from 'path'
 
-export default class ImbaCompiler
+export default class Compiler
 
 	prop directory\string = path.join os.tmpdir!, ".{name}"
 	prop code\string
