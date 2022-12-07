@@ -22,12 +22,12 @@ export default class TypeScriptCompiler < Compiler
 			let line = res.output.toString()
 
 			if !line.includes("error TS2451: Cannot redeclare block-scoped variable")
-				if line.includes("): error TS")
+				if line.includes("{self.sessionId}.ts") && line.includes("): error TS") && !line.includes('TS2304: Cannot find name')
 					failed = true
 
 					line = line.split('): error ')[1]
 
-				if line.trim! !== ',,'
+				if line.trim! !== ',,' && !line.includes('): error TS') && !line.includes("{self.sessionId}.ts")
 					process.stderr.write(line)
 
 		# read from compiled version.
