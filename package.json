@@ -1,6 +1,6 @@
 {
 	"name": "imba-shell",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"description": "Interactive debugger and REPL for Imba.",
 	"keywords": [
 		"imba",
@@ -11,7 +11,7 @@
 	],
 	"author": "Donald Pakkies",
 	"license": "MIT",
-	"main": "lib/index.js",
+	"main": "dist/index.js",
 	"types": "types/index.d.ts",
 	"bugs": "https://github.com/donaldp/imba-shell/issues",
 	"homepage": "https://github.com/donaldp/imba-shell",
